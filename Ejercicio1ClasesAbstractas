@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EjerciciosClasesAbstractas
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Cuadrado cuadrado1 = new Cuadrado("verde", 4);
+            Console.WriteLine($"El area del cuadrado instanciado es: {cuadrado1.CalcularArea()}");
+
+            Triangulo triangulo1 = new Triangulo("negro", 10, 15);
+            Console.WriteLine($"El area del triangulo instanciado es: {triangulo1.CalcularArea()}");
+
+            Circulo circulo1 = new Circulo("Blanco", 5);
+            Console.WriteLine($"El area del circulo instanciado es: {circulo1.CalcularArea()}");
+
+            Console.ReadLine();
+        }
+    }
+
+    public abstract class Figura {
+
+        public string Color;
+
+        public Figura(string color)
+        {
+            Color = color;
+            Console.WriteLine($"Creando una figura de color: {color}");
+        }
+        public abstract double CalcularArea();
+
+    }
+
+    public class Cuadrado : Figura
+    {
+        public double lado;
+
+        public Cuadrado(string color, double lado) : base(color)
+        {
+            this.lado = lado;
+        }
+
+        public override double CalcularArea()
+        {
+            double area = this.lado*this.lado;
+            return area;
+        }
+    }
+
+    public class Triangulo : Figura
+    {
+        public double Base;
+        public double Altura;
+
+        public Triangulo(string color, double Base, double Altura) : base(color)
+        {
+            this.Base = Base;
+            this.Altura = Altura;
+        }
+
+        public override double CalcularArea()
+        {
+            double area = (Base * Altura) / 2;
+            return area;
+        }
+    }
+
+    public class Circulo : Figura
+    {
+        public double radio;
+
+        public Circulo(string color, double radio) : base(color)
+        {
+            this.radio = radio;
+        }
+
+        public override double CalcularArea()
+        {
+            double area = Math.PI * (radio * radio);
+            return area;
+        }
+    }
+}
