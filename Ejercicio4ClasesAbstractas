@@ -1,0 +1,89 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EjerciciosSemana5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Animal [] listaAnimalesMuseo = new Animal[3];
+            listaAnimalesMuseo[0] = new Perro("perro", "terrier");
+            listaAnimalesMuseo[1] = new Gato("gato", "atigrado");
+            listaAnimalesMuseo[2] = new Vaca("vaca", "hereford");
+
+            foreach (Animal animales in listaAnimalesMuseo)
+            {
+                animales.Sonido();
+                Console.WriteLine("");
+            }
+            Console.ReadLine();
+        }
+
+    }
+
+    public abstract class Animal
+    {
+        public string Nombre;
+
+        public Animal (string nombre)
+        {
+            this.Nombre = nombre;
+        }
+
+        public abstract void Sonido();      
+        
+    }
+
+    public class Perro : Animal
+    {
+        public string Raza;
+
+        public Perro(string nombre, string raza) : base(nombre)
+        {
+            this.Raza = raza;
+        }
+
+        public override void Sonido()
+        {
+            Console.WriteLine($"El {this.Nombre} ladra");
+        }
+
+    }
+
+    public class Gato : Animal
+    {
+        public string Color;
+
+        public Gato(string nombre, string color) : base (nombre)
+        {
+            this.Color = color;
+        }
+
+        public override void Sonido()
+        {
+            Console.WriteLine($"El {this.Nombre} maulla");
+        }
+
+
+    }
+
+    public class Vaca : Animal
+    {
+        public string TipoRazaVaca;
+
+        public Vaca(string nombre, string tipoRazaVaca) : base(nombre)
+        {
+            this.TipoRazaVaca = tipoRazaVaca;
+        }
+
+        public override void Sonido()
+        {
+            Console.WriteLine($"La {this.Nombre} muge");
+        }
+
+    }
+}
