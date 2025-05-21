@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ejercicio3ClasesAbstractas
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Vehiculo[] vehiculos = new Vehiculo[3];
+            vehiculos[0] = new Auto("auto", "gris", "Volkswagen", "Golf");
+            vehiculos[1] = new Moto("moto", "verde", "naked");
+            vehiculos[2] = new Camion("camion", "blanco", "EcoEnvios", 16);
+            foreach (Vehiculo v in vehiculos)
+            {
+                v.Arrancar();
+                v.Acelerar();
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
+        }
+    }
+
+    public abstract class Vehiculo
+    {
+        public string TipoVehiculo;
+        public string Color;
+
+        public Vehiculo (string tipoVehiculo, string color)
+        {
+            this.TipoVehiculo = tipoVehiculo;
+            this.Color = color;
+        }
+
+        public abstract void Arrancar();
+
+        public virtual void Acelerar()
+        {
+            Console.WriteLine("Acelerando...!");
+        }
+        
+    }
+
+    public class Auto : Vehiculo
+    {
+        public string Marca;
+        public string Modelo;
+
+        public Auto(string tipoVehiculo, string color, string marca, string modelo) : base(tipoVehiculo, color)
+        {
+            this.Marca = marca;
+            this.Modelo = modelo;
+        }
+
+        public override void Arrancar()
+        {
+            Console.WriteLine($"Arrancando este {this.TipoVehiculo} de color {this.Color}");
+        }
+
+        public override void Acelerar()
+        {
+            Console.WriteLine($"Acelerandoooo este {this.TipoVehiculo}");
+        }
+    }
+
+    public class Moto : Vehiculo
+    {
+        public string tipoMoto;
+
+        public Moto(string tipoVehiculo, string color, string tipoMoto) : base(tipoVehiculo, color)
+        {
+            this.tipoMoto = tipoMoto;
+        }
+
+        public override void Arrancar()
+        {
+            Console.WriteLine($"Arrancando esta {this.TipoVehiculo} {this.tipoMoto} de color {this.Color}");
+        }
+
+        public override void Acelerar()
+        {
+            Console.WriteLine($"Acelerandoooo esta {this.TipoVehiculo} {this.tipoMoto}");
+        }
+
+    }
+
+    public class Camion : Vehiculo
+    {
+        public string Empresa;
+        public int cantidadRuedas;
+
+        public Camion (string tipoVehiculo, string color, string Empresa, int cantidadRuedas) : base (tipoVehiculo, color)
+        {
+            this.Empresa = Empresa;
+            this.cantidadRuedas = cantidadRuedas;
+        }
+
+        public override void Arrancar()
+        {
+            Console.WriteLine($"Arrancando este {this.TipoVehiculo} de color {this.Color}. Este {this.TipoVehiculo} es de la empresa {this.Empresa} y tiene {this.cantidadRuedas} ruedas.");
+        }
+
+        public override void Acelerar()
+        { 
+            Console.WriteLine($"Acelerandoooo este {this.TipoVehiculo} {this.Color}!!");
+        }
+
+    }
+}
