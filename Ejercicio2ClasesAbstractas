@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ejercicio2ClasesAbstractas
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            EmpleadoTiempoCompleto empleadoTiempoCompleto1 = new EmpleadoTiempoCompleto("Enrique", 10000, 2000);
+            Console.WriteLine($"El sueldo del empleado {empleadoTiempoCompleto1.Nombre} es: {empleadoTiempoCompleto1.CalcularSueldo()}");
+
+            EmpleadoMedioTiempo empleadoMedioTiempo1 = new EmpleadoMedioTiempo("Rogelio", 8000, 1500, true);
+            Console.WriteLine($"El sueldo del empleado {empleadoMedioTiempo1.Nombre} es: {empleadoMedioTiempo1.CalcularSueldo()}");
+
+            Console.ReadLine();
+        }
+    }   
+
+    public abstract class Empleado
+    {
+        public string Nombre;
+        public double SueldoBase;
+
+        public Empleado(string nombre, double sueldoBase)
+        {
+            this.Nombre = nombre;
+            this.SueldoBase = sueldoBase;
+        }
+
+        public abstract double CalcularSueldo();
+    }
+
+    public class EmpleadoTiempoCompleto : Empleado
+    {
+        public double bonoPresentismo;
+
+        public EmpleadoTiempoCompleto(string nombre, double sueldoBase, double bonoPresentismo) : base (nombre, sueldoBase)
+        {
+            this.bonoPresentismo = bonoPresentismo;
+        }
+
+        public override double CalcularSueldo()
+        {
+            double sueldo = this.SueldoBase + this.bonoPresentismo;
+            return sueldo;
+        }
+    }
+
+    public class EmpleadoMedioTiempo : Empleado
+    {
+        public double bonoExtra;
+        public bool supero20Horas;
+
+        public EmpleadoMedioTiempo(string nombre, double sueldoBase, double bonoExtra, bool supero20Horas) : base(nombre, sueldoBase)
+        {
+
+            this.bonoExtra = bonoExtra;
+            this.supero20Horas = supero20Horas;
+        }
+
+
+        public override double CalcularSueldo()
+        {
+            double sueldo;
+            if(supero20Horas)
+            {
+                sueldo = SueldoBase + bonoExtra;
+            } else
+            {
+                sueldo = SueldoBase;
+            }
+            return sueldo;
+        }
+    }
+    
+}
