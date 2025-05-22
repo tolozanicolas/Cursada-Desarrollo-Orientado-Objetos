@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EjerciciosSemana5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            IExportable[] exportadores = new IExportable[3];
+
+            exportadores[0] = new ExportadorPDF("20KB");
+            exportadores[1] = new ExportadorExcel(16);
+            exportadores[2] = new ExportadorCSV();
+
+            foreach(IExportable exportador in exportadores)
+            {
+                Console.WriteLine(exportador.ExportarArchivo());
+                Console.WriteLine("");
+            }
+            Console.ReadLine();
+
+
+        }
+
+    }
+
+    interface IExportable
+    {
+        string ExportarArchivo();
+    }
+
+    
+    public class ExportadorPDF : IExportable
+    {
+        public string TamanioArchivo;
+        public ExportadorPDF (string tamanioArchivo)
+        {
+            this.TamanioArchivo = tamanioArchivo;
+        }
+        public string ExportarArchivo()
+        {
+            return $"Se exporta el archivo PDF de tamaño {this.TamanioArchivo} exitosamente";
+        }
+    }
+
+    public class ExportadorExcel : IExportable
+    {
+        public int CantidadHojas;
+
+        public ExportadorExcel ( int cantidadHojas)
+        {
+            this.CantidadHojas = cantidadHojas;
+        }
+
+        public string ExportarArchivo()
+        {
+            return $"Se exporta el archivo XLS, el cual tiene {this.CantidadHojas} hojas exitosamente.";
+        }
+
+    }
+
+    public class ExportadorCSV : IExportable
+    {
+        public string ExportarArchivo()
+        {
+            return $"Se exporta el archivo CSV exitosamente.";
+        }
+    }
+
+    
+}
