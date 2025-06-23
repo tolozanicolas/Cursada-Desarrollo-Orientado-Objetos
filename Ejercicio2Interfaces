@@ -1,0 +1,71 @@
+class Program
+    {
+        static void Main(string[] args)
+        {
+            IVehiculo[] vehiculos = new IVehiculo[3];
+            vehiculos[0] = new Auto("Chevrolet", "Astra");
+            vehiculos[1] = new Moto("touring");
+            vehiculos[2] = new Bicicleta("GT");
+
+            foreach (IVehiculo vehiculo in vehiculos)
+            {
+                vehiculo.Conducir();
+                Console.WriteLine("------------------------");
+            }
+            Console.ReadLine();
+          
+        }
+
+        interface IVehiculo
+        {
+            void Conducir();
+        }
+        
+        public class Auto : IVehiculo
+        {
+            public string Marca { get; set; }
+            public string Modelo { get; set; }
+
+            public Auto(string marca, string modelo)
+            {
+                this.Marca = marca;
+                this.Modelo = modelo;
+            }
+
+            public void Conducir()
+            {
+                Console.WriteLine($"Conduciendo este auto marca {this.Marca}, modelo {this.Modelo}.");
+            }
+        }
+
+        public class Moto : IVehiculo
+        {
+            public string TipoMoto { get; set; }
+
+            public Moto(string tipoMoto)
+            {
+                this.TipoMoto = tipoMoto;
+            }
+
+            public void Conducir()
+            {
+                Console.WriteLine($"Conduciendo esta moto {this.TipoMoto}.");
+            }
+        }
+
+        public class Bicicleta : IVehiculo
+        {
+            public string Marca { get; set; }
+
+            public Bicicleta (string marca)
+            {
+                this.Marca = marca;
+            }
+
+            public void Conducir()
+            {
+                Console.WriteLine($"Conduciendo esta bicicleta marca {this.Marca}.");
+            }
+        }
+
+    }
